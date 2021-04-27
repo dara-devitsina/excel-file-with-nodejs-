@@ -37,7 +37,6 @@ export function getClientCode(previous, beforePrevious) {
 	} if (previous === 1) {
 		return 2;
 	} else {
-		console.log(previous)
 		return previous + beforePrevious;
 	}
 };
@@ -107,5 +106,3 @@ export function getDiscount(birthDate) {
 		return 'скидка 3%';
 	}
 };
-
-console.log(getDiscount('01.01.1970'))

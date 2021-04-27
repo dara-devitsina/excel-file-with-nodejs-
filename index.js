@@ -3,9 +3,11 @@
 import { getRandomGender, getRandomName, getRandomPhoneNumber, getClientCode, getRandomBirthDate, getDiscount } from './utils.js';
 import Excel from 'exceljs';
 
+// initialize new workbook
 let workbook = new Excel.Workbook();
 let worksheet = workbook.addWorksheet('Clients');
 
+// add columns
 worksheet.columns = [
 	{ header: 'ФИО;', key: 'name' },
 	{ header: 'Телефон;', key: 'phone' },
@@ -23,12 +25,14 @@ worksheet.columns = [
 	{ header: 'Баланс бонусного счета клиента;', key: 'clientsBonusAccount' },
 ];
 
+// format columns
 worksheet.columns.forEach(column => {
 	column.width = column.header.length < 12 ? 12 : column.header.length
 })
 
 worksheet.getRow(1).font = { bold: true }
 
+// fill the columns with data
 for (let i = 1; i < 50; i += 1) {
 	worksheet.addRow({id: 1, gender: getRandomGender(),
 		phone: getRandomPhoneNumber(),
@@ -48,4 +52,5 @@ for (let i = 2; i <= 50; i += 1) {
 	currenStatus.value = getDiscount(currentBirthDate);
 }
 
+// save the table
 workbook.xlsx.writeFile('/home/darusya/Документы/Clients.xlsx')
