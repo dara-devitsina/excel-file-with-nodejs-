@@ -1,8 +1,7 @@
 import { femaleNames, femaleMiddlenames, femaleSurnames, maleNames, maleMiddlenames, maleSurnames} from './names.js';
+import { getRandomNumber } from './random-number.js';
 
 const genders = ['м', 'ж'];
-
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 export function getRandomGender() {
 	return genders[getRandomNumber(0, 1)];
