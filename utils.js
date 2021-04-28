@@ -59,11 +59,38 @@ export function getRandomBirthDate() {
 	}
 };
 
+function isYearLeap(year) {
+	// If a year is multiple of 400, then it is a leap year
+	if (year % 400 == 0)
+		return true;
+	// Else If a year is multiple of 100, then it is not a leap year
+	else if (year % 100 == 0)
+		return false;
+	// Else If a year is multiple of 4, then it is a leap year
+	else if (year % 4 == 0)
+		return true;
+	return false;
+}
+
+function getNumberOfLeapYears(startYear, endYear) {
+	let numberOfLeapYears = 0;
+	for (let i = startYear; i <= endYear; i += 1) {
+		if (isYearLeap(i)) {
+			numberOfLeapYears += 1;
+		}
+	}
+	return numberOfLeapYears;
+}
+
 export function getDiscount(birthDate) {
 	const userDate = Date.parse(birthDate); // find milliseconds passed from 01.01.1970
 	const currentDate = Date.now();
 	const difference = currentDate - userDate; // find milliseconds passed from birth date
-	const age = Math.floor(difference / 1000 / 60 / 60 / 24 / 365); // find years passed from birth date
+	const userYear = new Date(userDate).getFullYear();
+	const currentYear = new Date().getFullYear();
+	const numberOfLeapYears = getNumberOfLeapYears(userYear, currentYear);
+	const days = (difference / 1000 / 60 / 60 / 24) - numberOfLeapYears;
+	const age = Math.floor(days / 365); // find years passed from birth date
 	if (age >= 20 && age <= 30) {
 		return 'скидка 5 %';
 	} else if (age > 30) {
