@@ -105,3 +105,5 @@ export function getDiscount(birthDate) {
 		return 'скидка 3%';
 	}
 };
+
+console.log(getRandomName('ж'))

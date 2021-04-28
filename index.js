@@ -1,7 +1,5 @@
-'use strict'
-
-import { getRandomGender, getRandomName, getRandomPhoneNumber, getClientCode, getRandomBirthDate, getDiscount } from './utils.js';
 import Excel from 'exceljs';
+import { getRandomGender, getRandomName, getRandomPhoneNumber, getClientCode, getRandomBirthDate, getDiscount } from './utils.js';
 
 // initialize new workbook
 let workbook = new Excel.Workbook();
@@ -38,18 +36,14 @@ for (let i = 1; i < 50; i += 1) {
 		phone: getRandomPhoneNumber(),
 		code: getClientCode(worksheet.getRow(i).getCell('code').value, worksheet.getRow(i - 1).getCell('code').value),
 		birthdate: getRandomBirthDate()});
-}
 
-for (let i = 2; i <= 50; i += 1) {
-	let currentName = worksheet.getRow(i).getCell('name');
-	const currentGender = worksheet.getRow(i).getCell('gender').value;
-	currentName.value = getRandomName(currentGender);
-}
+		let currentName = worksheet.getRow(i + 1).getCell('name');
+		const currentGender = worksheet.getRow(i + 1).getCell('gender').value;
+		currentName.value = getRandomName(currentGender);
 
-for (let i = 2; i <= 50; i += 1) {
-	const currentBirthDate = worksheet.getRow(i).getCell('birthdate').value;
-	const currenStatus = worksheet.getRow(i).getCell('status');
-	currenStatus.value = getDiscount(currentBirthDate);
+		const currentBirthDate = worksheet.getRow(i + 1).getCell('birthdate').value;
+		const currenStatus = worksheet.getRow(i + 1).getCell('status');
+		currenStatus.value = getDiscount(currentBirthDate);
 }
 
 // save the table
