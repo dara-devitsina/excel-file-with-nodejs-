@@ -49,65 +49,26 @@ export function getRandomBirthDate() {
 	const month = getRandomNumber(1, 12);
 	const year = getRandomNumber(1970, 2000);
 	if (day < 10 && month < 10) {
-		return `0${day}.0${month}.${year}`;
+		return `0${month}.0${day}.${year}`;
 	} else if (day < 10) {
-		return `0${day}.${month}.${year}`;
+		return `${month}.0${day}.${year}`;
 	} else if (month < 10) {
-		return `${day}.0${month}.${year}`;
+		return `0${month}.${day}.${year}`;
 	} else {
-		return `${day}.${month}.${year}`;
+		return `${month}.${day}.${year}`;
 	}
 };
 
 export function getDiscount(birthDate) {
-	const currentDate = new Date();
-	const currentDay = currentDate.getDate();
-	const currentMonth = currentDate.getMonth();
-	const currentYear = currentDate.getFullYear();
-
-	const splitDate = birthDate.split('.');
-
-	const userDay = splitDate[0];
-	const userMonth = splitDate[1];
-	const userYear = splitDate[2];
-
-	if (currentYear - userYear > 20 && currentYear - userYear < 30) {
-		return 'скидка 5%';
-	}
-	
-	if (currentYear - userYear > 30) {
-		return 'скидка 7%';
-	}
-
-	if (currentYear - userYear === 20) {
-		if (currentMonth - userMonth === 0) {
-			if (currentDay - userDay <= 0) {
-				return 'скидка 5%';
-			} else {
-				return 'скидка 3%';
-			}
-		} if (currentMonth - userMonth >= 0) {
-			return 'скидка 5%';
-		} if (currentMonth - userMonth <= 0) {
-			return 'скидка 3%';
-		}
-	}
-	
-	if (currentYear - userYear === 30) {
-		if (currentMonth - userMonth === 0) {
-			if (currentDay - userDay <= 0) {
-				return 'скидка 7%';
-			} else {
-				return 'скидка 5%';
-			}
-		} if (currentMonth - userMonth >= 0) {
-			return 'скидка 7%';
-		} if (currentMonth - userMonth <= 0) {
-			return 'скидка 5%';
-		}
-	} if (currentYear - userYear < 20) {
-		return 'скидка 3%';
+	const userDate = Date.parse(birthDate); // find milliseconds passed from 01.01.1970
+	const currentDate = Date.now();
+	const difference = currentDate - userDate; 
+	const age = Math.floor(difference / 1000 / 60 / 60 / 24 / 365); // find years passed from 01.01.1970
+	if (age >= 20 && age <= 30) {
+		return 'скидка 5 %';
+	} else if (age > 30) {
+		return 'скидка 7 %';
+	} else {
+		return 'скидка 3 %';
 	}
 };
-
-console.log(getRandomName('ж'))
