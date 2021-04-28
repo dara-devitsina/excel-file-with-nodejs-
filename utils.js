@@ -62,8 +62,8 @@ export function getRandomBirthDate() {
 export function getDiscount(birthDate) {
 	const userDate = Date.parse(birthDate); // find milliseconds passed from 01.01.1970
 	const currentDate = Date.now();
-	const difference = currentDate - userDate; 
-	const age = Math.floor(difference / 1000 / 60 / 60 / 24 / 365); // find years passed from 01.01.1970
+	const difference = currentDate - userDate; // find milliseconds passed from birth date
+	const age = Math.floor(difference / 1000 / 60 / 60 / 24 / 365); // find years passed from birth date
 	if (age >= 20 && age <= 30) {
 		return 'скидка 5 %';
 	} else if (age > 30) {
