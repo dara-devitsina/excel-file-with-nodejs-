@@ -9,14 +9,17 @@ export function getRandomGender() {
 
 export function getRandomName(gender) {
 	let name, middlename, surname;
-	if (gender === 'ж') {
-		name = femaleNames[getRandomNumber(0, femaleNames.length - 1)];
-		middlename = femaleMiddlenames[getRandomNumber(0, femaleMiddlenames.length - 1)];
-		surname = femaleSurnames[getRandomNumber(0, femaleSurnames.length - 1)];
-	} if (gender === 'м') {
-		name = maleNames[getRandomNumber(0, maleNames.length - 1)];
-		middlename = maleMiddlenames[getRandomNumber(0, maleMiddlenames.length - 1)];
-		surname = maleSurnames[getRandomNumber(0, maleSurnames.length - 1)];
+	switch(gender) {
+		case 'ж':
+			name = femaleNames[getRandomNumber(0, femaleNames.length - 1)];
+			middlename = femaleMiddlenames[getRandomNumber(0, femaleMiddlenames.length - 1)];
+			surname = femaleSurnames[getRandomNumber(0, femaleSurnames.length - 1)];
+			break;
+		case 'м':
+			name = maleNames[getRandomNumber(0, maleNames.length - 1)];
+			middlename = maleMiddlenames[getRandomNumber(0, maleMiddlenames.length - 1)];
+			surname = maleSurnames[getRandomNumber(0, maleSurnames.length - 1)];
+			break;
 	}
 	return `${name} ${middlename} ${surname}`;
 };
@@ -31,12 +34,13 @@ export function getRandomPhoneNumber() {
 };
 
 export function getClientCode(previous, beforePrevious) {
-	if (previous === 'Код клиента;') {
-		return 1;
-	} if (previous === 1) {
-		return 2;
-	} else {
-		return previous + beforePrevious;
+	switch(previous) {
+		case 'Код клиента;':
+			return 1;
+		case 1:
+			return 2;
+		default:
+			return previous + beforePrevious;
 	}
 };
 
